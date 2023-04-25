@@ -1,4 +1,4 @@
-import { Schema } from 'mongoose';
+import { Schema, UpdateQuery } from 'mongoose';
 import AbstractODM from './AbstractODM';
 import ICar from '../Interfaces/ICar';
 
@@ -22,6 +22,14 @@ class CarODM extends AbstractODM<ICar> {
 
   public async findById(id: string): Promise<ICar | null> {
     return this.model.findById(id);
+  }
+
+  public async updateCarsById(id: string, car: ICar): Promise<ICar | null> {
+    return this.model.findByIdAndUpdate(
+      { _id: id },
+      { ...car } as UpdateQuery<ICar>,
+      { new: true },
+    );
   }
 }
 
