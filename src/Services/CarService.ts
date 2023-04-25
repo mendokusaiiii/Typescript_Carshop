@@ -36,7 +36,7 @@ class CarService {
   public async updateCarsById(id: string, body: ICar) {
     const updateCar = await this.getCarsById(id);
     if (!updateCar) {
-      throw new Handler(404, 'Car no found');
+      throw new Handler(404, 'Car not found');
     }
     if (id.length !== 24) {
       throw new Handler(422, 'Invalid mongo id');
